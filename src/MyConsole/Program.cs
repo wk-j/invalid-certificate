@@ -40,12 +40,9 @@ namespace MyConsole {
 
             collection.AddHttpClient("aaa").ConfigurePrimaryHttpMessageHandler(() => {
                 var handler = new HttpClientHandler {
-                    ServerCertificateCustomValidationCallback = (httpRequestMessage, x509Certificate2, x509Chain, sslPolicyErrors) => {
-                        return true;
-                    },
+                    // ServerCertificateCustomValidationCallback = delegate { return true; },
+                    ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
                 };
-                // handler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
-                handler.ServerCertificateCustomValidationCallback = delegate { return true; };
                 return handler;
             });
 
